@@ -51,6 +51,10 @@ function GuestBook() {
       })
     );
   };
+  const onCancle = () => {
+    setName("");
+    setLike([]);
+  };
   return (
     <>
       <Head>
@@ -95,7 +99,9 @@ function GuestBook() {
           <Button variant="outlined" type="submit" onClick={onSubmit}>
             등록하기!
           </Button>
-
+          <Button variant="outlined" type="reset" onClick={onCancle}>
+            취소하기
+          </Button>
           <NavigationBar />
         </div>
       </main>

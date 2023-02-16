@@ -1,9 +1,21 @@
 import CardCarousel from "@/component/cardcarousel";
 import NavigationBar from "@/component/navigation";
 import styles from "@/styles/Home.module.css";
+import {
+  TableContainer,
+  Paper,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from "@mui/material";
+import movies from "../data/movie.json";
 import Head from "next/head";
+import { Table } from "react-bootstrap";
+import Image from "next/image";
 
 function Movie() {
+  const rows = movies;
   return (
     <>
       <Head>
@@ -14,7 +26,7 @@ function Movie() {
       </Head>
       <main className={styles.main}>
         <div className={styles.center}>
-          <div
+          {/* <div
             style={{
               display: "flex",
               flexDirection: "column",
@@ -34,6 +46,50 @@ function Movie() {
             >
               <CardCarousel />
             </div>
+          </div> */}
+          <h1 style={{ marginTop: "3%" }}>인생 영화 BEST5</h1>
+          <div style={{ padding: "15px" }}>
+            <TableContainer component={Paper}>
+              <Table aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell width="50px">순위</TableCell>
+                    <TableCell align="left">제목</TableCell>
+                    <TableCell align="left">포스터</TableCell>
+                    <TableCell align="left">줄거리</TableCell>
+                    <TableCell align="left">바로가기</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.items.map((row) => (
+                    <TableRow key={row.prefer}>
+                      <TableCell width={10} component="th" scope="row">
+                        {row.prefer}
+                      </TableCell>
+                      <TableCell align="left">
+                        <h5 style={{ fontSize: "15px" }}>{row.title}</h5>
+                      </TableCell>
+                      <TableCell align="left">
+                        <Image
+                          width={100}
+                          height={100}
+                          alt={row.title}
+                          src={row.imageUrl}
+                        ></Image>
+                      </TableCell>
+                      <TableCell align="left">
+                        {row.content.length > 150
+                          ? `${row.content.substring(0, 150)}...`
+                          : row.content}
+                      </TableCell>
+                      <TableCell align="left">
+                        <a href={row.url}>영화 보러가기</a>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </div>
           <NavigationBar />
         </div>
