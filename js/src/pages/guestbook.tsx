@@ -1,13 +1,12 @@
 import CheckBox from "@/component/checkbox";
 import Guest from "@/component/guest";
-import movies from "../data/movie.json";
+import MovieItem from "@/component/Movie";
 import NavigationBar from "@/component/navigation";
 import styles from "@/styles/Home.module.css";
 import { Button, FormControlLabel, TextField } from "@mui/material";
 import Head from "next/head";
 import { useState } from "react";
-import Movie from "./movie";
-import MovieItem from "@/component/Movie";
+import movies from "../data/movie.json";
 
 type visited = {
   name: string;
@@ -40,7 +39,18 @@ function GuestBook() {
     newOne.sort();
     setLike(newOne);
   };
-
+  const onSubmit = () => {
+    if (name === "") {
+      alert("이름을 입력해주세요");
+      return;
+    }
+    setGuestBooks((prev) =>
+      prev.concat({
+        name: name,
+        liked: like,
+      })
+    );
+  };
   return (
     <>
       <Head>
@@ -57,7 +67,6 @@ function GuestBook() {
             <Guest name={guestBook.name} liked={guestBook.liked}></Guest>
           ))}
           <div>
-            <h2></h2>
             <TextField
               id="outlined-controlled"
               value={name}
@@ -83,7 +92,9 @@ function GuestBook() {
               label={movie.title}
             />
           ))}
-          <Button variant="outlined">등록하기!</Button>
+          <Button variant="outlined" type="submit" onClick={onSubmit}>
+            등록하기!
+          </Button>
 
           <NavigationBar />
         </div>
