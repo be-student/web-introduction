@@ -1,18 +1,17 @@
-import CardCarousel from "@/component/cardcarousel";
 import NavigationBar from "@/component/navigation";
 import styles from "@/styles/Home.module.css";
 import {
-  TableContainer,
   Paper,
+  TableBody,
+  TableCell,
+  TableContainer,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
 } from "@mui/material";
-import movies from "../data/movie.json";
 import Head from "next/head";
-import { Table } from "react-bootstrap";
 import Image from "next/image";
+import { Table } from "react-bootstrap";
+import movies from "../data/movie.json";
 
 function Movie() {
   const rows = movies;
@@ -26,27 +25,6 @@ function Movie() {
       </Head>
       <main className={styles.main}>
         <div className={styles.center}>
-          {/* <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              minHeight: "90vh",
-              width: "100%",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                paddingLeft: "10%",
-                paddingRight: "10%",
-              }}
-            >
-              <CardCarousel />
-            </div>
-          </div> */}
           <h1 style={{ marginTop: "3%" }}>인생 영화 BEST5</h1>
           <div style={{ padding: "15px" }}>
             <TableContainer component={Paper}>

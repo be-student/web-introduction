@@ -7,7 +7,6 @@ type Props = {
 const Card = (props: Props) => {
   return (
     <div>
-      <h1>{props.prefer}번째로 좋아하는 영화</h1>
       <div
         style={{
           display: "flex",
@@ -25,7 +24,7 @@ const Card = (props: Props) => {
           alt={props.title}
         />
         <div>
-          <h2>{props.title}</h2>
+          <h2 style={{ marginTop: "30px" }}>{props.title}</h2>
         </div>
       </div>
     </div>
