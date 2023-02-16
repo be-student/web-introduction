@@ -1,9 +1,9 @@
-import React, { Component, useState } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
-import Card from "./card";
-import movies from "../data/movie.json";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import movies from "../data/movie.json";
+import Card from "./card";
 
 function NextJsCarousel() {
   const [item, setItem] = useState(0);

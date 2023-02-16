@@ -1,17 +1,21 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
-import NavigationBar from "@/component/navigation";
-import { Avatar } from "@mui/material";
-import { useState } from "react";
+import CheckBox from "@/component/checkbox";
 import Guest from "@/component/guest";
+import movies from "../data/movie.json";
+import NavigationBar from "@/component/navigation";
+import styles from "@/styles/Home.module.css";
+import { Button, FormControlLabel, TextField } from "@mui/material";
+import Head from "next/head";
+import { useState } from "react";
+import Movie from "./movie";
+import MovieItem from "@/component/Movie";
 
 type visited = {
   name: string;
   liked: string[];
 };
 function GuestBook() {
+  const [name, setName] = useState<string>("");
+  const [like, setLike] = useState<string[]>([]);
   const [guestBooks, setGuestBooks] = useState<visited[]>([
     {
       name: "누누",
@@ -24,6 +28,19 @@ function GuestBook() {
       ],
     },
   ]);
+  const onChangeName = (e: any) => {
+    setName(e.target.value);
+  };
+
+  const onCheck = (movieName: string) => () => {
+    setLike((prev) => prev.filter((data) => data !== movieName));
+  };
+  const onUndo = (movieName: string) => () => {
+    const newOne = like.concat(movieName);
+    newOne.sort();
+    setLike(newOne);
+  };
+
   return (
     <>
       <Head>
@@ -39,8 +56,37 @@ function GuestBook() {
           {guestBooks.map((guestBook) => (
             <Guest name={guestBook.name} liked={guestBook.liked}></Guest>
           ))}
+          <div>
+            <h2></h2>
+            <TextField
+              id="outlined-controlled"
+              value={name}
+              onChange={onChangeName}
+              placeholder="닉네임"
+            ></TextField>
+          </div>
+          <div style={{ height: "40px", display: "flex" }}>
+            {like.map((it) => (
+              <MovieItem title={it}></MovieItem>
+            ))}
+          </div>
+
+          {movies.items.map((movie) => (
+            <FormControlLabel
+              key={movie.title}
+              control={
+                <CheckBox
+                  onCheck={onCheck(movie.title)}
+                  onUndo={onUndo(movie.title)}
+                />
+              }
+              label={movie.title}
+            />
+          ))}
+          <Button variant="outlined">등록하기!</Button>
+
+          <NavigationBar />
         </div>
-        <NavigationBar />
       </main>
     </>
   );
